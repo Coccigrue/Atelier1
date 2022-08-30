@@ -16,7 +16,7 @@ const server = http.createServer((req, res) => {
         body.push(chunk);
       }).on('end', () => {
         try {
-          if (req.headers['content-type'] === "application/x-www-form-urlencoded")
+          if (req.headers['content-type'] === "application/json")
             reqInfo.body = JSON.parse(body);
           else
             if (req.headers['content-type'] === "application/x-www-form-urlencoded")
