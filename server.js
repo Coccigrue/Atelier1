@@ -7,15 +7,16 @@ const server = http.createServer((req, res) => {
 
   res.writeHead(200, { "Content-Type": "application/json" });
   if (req.method == 'GET') {
-    res.end(JSON.stringify(reqInfo));
-  } else {
+    res.end(JSON.stringify(reqInfo)); // le contenu de bodu est souvent referer avec payload
+  }
+  else {
     if (req.method == 'POST') {
       let body = [];
       req.on('data', chunk => {
         body.push(chunk);
       }).on('end', () => {
         try {
-          if (req.headers['content-type'] === "application/json")
+          if (req.headers['content-type'] === "application/x-www-form-urlencoded")
             reqInfo.body = JSON.parse(body);
           else
             if (req.headers['content-type'] === "application/x-www-form-urlencoded")
